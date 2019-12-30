@@ -2,7 +2,8 @@ import cv2
 import pyzbar.pyzbar as pyzbar
 import numpy as np
 
-img = cv2.imread('/Users/rohan/Downloads/images/test4.png')
+path = '/Users/rohan/Downloads/images/test4.png'
+img = cv2.imread(path)
 
 
 d = pyzbar.decode(img)
