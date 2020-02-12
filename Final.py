@@ -5,6 +5,7 @@ try:
     from PIL import Image
 except ImportError:
     import Image
+import csv
 import pytesseract
 import argparse
 import cv2
@@ -41,10 +42,9 @@ def ocr_core(filename):
 output_file = "/Users/rohan/Downloads/Adisys/OUTPUT.txt"
 path = "/Users/rohan/Downloads/Adisys"
 list_ = os.listdir(path)
-file = open(output_file,'a')
 
-file.write('FRESH START HERE')
-
+file = open('/Users/rohan/Downloads/Adisys/OUTPUT.csv', 'w', newline='')
+writer = csv.writer(file, delimiter='|')
 
 
 print(list_)
@@ -104,10 +104,10 @@ for cam in list_:
                 #print('Ocr calllllinggggg ', ocr_result, "      " , tie.tm_min)
                 if len(ocr_result) == 3:
                     tm = time.localtime(time.time())
-                    line = str(tm.tm_hour) + str(tm.tm_min) + str(tm.tm_sec) + ',' + cam + ',' + str(ocr_result)
+                    line = str(tm.tm_hour) + str(tm.tm_min) + ',' + cam + ',' + str(ocr_result)
                     print (line)
                     #file.writelines(line)
-                    file.write(line)
+                    writer.writerow([str(tm.tm_hour), str(tm.tm_min), cam, '    ', str(ocr_result)])
 
 
 
